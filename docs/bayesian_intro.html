@@ -525,10 +525,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomjennysjaardafuturereferencetree1d7bcab82e9ff2806909c2825e940369d0f4168ftargetblank1d7bcaba"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/jennysjaarda/future_reference/tree/1d7bcab82e9ff2806909c2825e940369d0f4168f" target="_blank">1d7bcab</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomjennysjaardafuturereferencetree89b229f4581ddc227b608465794e2aea8dc2fad6targetblank89b229fa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/jennysjaarda/future_reference/tree/89b229f4581ddc227b608465794e2aea8dc2fad6" target="_blank">89b229f</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomjennysjaardafuturereferencetree1d7bcab82e9ff2806909c2825e940369d0f4168ftargetblank1d7bcaba" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomjennysjaardafuturereferencetree89b229f4581ddc227b608465794e2aea8dc2fad6targetblank89b229fa" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -577,6 +577,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/jennysjaarda/future_reference/blob/89b229f4581ddc227b608465794e2aea8dc2fad6/analysis/bayesian_intro.Rmd" target="_blank">89b229f</a>
+</td>
+<td>
+Jenny
+</td>
+<td>
+2019-12-20
+</td>
+<td>
+Updating webiste
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/jennysjaarda/future_reference/bf770c287871430d8d5a989d58e1fb1c07607c37/docs/bayesian_intro.html" target="_blank">bf770c2</a>
+</td>
+<td>
+Jenny
+</td>
+<td>
+2019-12-20
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -631,7 +665,7 @@ Updating webiste
 <li>Our current model has one unknown: rate of signing up (i.e. it is unknown whether each random individual will sign up or not).</li>
 <li>There is also uncertainty in the probability of signing up itself (let’s represent it as a uniform distribution).</li>
 <li>Randomly generate theta 100,000x and fit: Binomial(16, theta); in other words</li>
-<li><p>Remove all simulations that did not match our data exactly. <img src="images/bayes_eg1_remove_sims.png" width="50%" style="display: block; margin: auto auto auto 0;" /></p></li>
+<li><p>Remove all simulations that did not match our data exactly. <img src="assets/bayes_eg1_remove_sims.png" width="50%" style="display: block; margin: auto auto auto 0;" /></p></li>
 <li>Then we are left with a new set of thetas, and we have a new distribution (posterior).</li>
 </ul></li>
 <li>The maximum likelihood estimate is the most likely parameter to generate the observed data.</li>
@@ -652,6 +686,43 @@ observed_data=6
 prior &lt;- runif(n_draws, 0, 1) # Here you sample n_draws draws from the prior  
 hist(prior) # It&#39;s always good to eyeball the prior to make sure it looks ok.</code></pre>
 <p><img src="figure/bayesian_intro.Rmd/unnamed-chunk-2-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-2-1">
+Past versions of unnamed-chunk-2-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-2-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jennysjaarda/future_reference/blob/bf770c287871430d8d5a989d58e1fb1c07607c37/docs/figure/bayesian_intro.Rmd/unnamed-chunk-2-1.png" target="_blank">bf770c2</a>
+</td>
+<td>
+Jenny
+</td>
+<td>
+2019-12-20
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code># Here you define the generative model
 
 generative_model &lt;- function(rate) {
@@ -671,6 +742,43 @@ posterior &lt;- prior[sim_data == observed_data]
 
 hist(posterior) # Eyeball the posterior</code></pre>
 <p><img src="figure/bayesian_intro.Rmd/unnamed-chunk-2-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-2-2">
+Past versions of unnamed-chunk-2-2.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-2-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jennysjaarda/future_reference/blob/bf770c287871430d8d5a989d58e1fb1c07607c37/docs/figure/bayesian_intro.Rmd/unnamed-chunk-2-2.png" target="_blank">bf770c2</a>
+</td>
+<td>
+Jenny
+</td>
+<td>
+2019-12-20
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>length(posterior) # See that we got enought draws left after the filtering.</code></pre>
 <pre><code>[1] 633</code></pre>
 <pre class="r"><code>                  # There are no rules here, but you probably want to aim
@@ -693,13 +801,50 @@ signups &lt;- rbinom(n = length(posterior), size = 100, prob = posterior)
 
 hist(signups, xlim = c(0, 100))</code></pre>
 <p><img src="figure/bayesian_intro.Rmd/unnamed-chunk-2-3.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-2-3">
+Past versions of unnamed-chunk-2-3.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-2-3" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jennysjaarda/future_reference/blob/bf770c287871430d8d5a989d58e1fb1c07607c37/docs/figure/bayesian_intro.Rmd/unnamed-chunk-2-3.png" target="_blank">bf770c2</a>
+</td>
+<td>
+Jenny
+</td>
+<td>
+2019-12-20
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="summary-of-exercise-1" class="section level3">
 <h3>Summary of exercise 1:</h3>
 <ul>
 <li>We started with a prior (uniform distribution) and moved to a posterior (roughly normal).</li>
 <li>How exactly did we get the posterior probability from the prior?</li>
-<li>Let’s use a sign up rate of 35% as an example and see how it change from the prior to the posterior probability: <img src="images/bayes_eg1_prior_posterior.png" width="50%" style="display: block; margin: auto auto auto 0;" />
+<li>Let’s use a sign up rate of 35% as an example and see how it change from the prior to the posterior probability: <img src="assets/bayes_eg1_prior_posterior.png" width="50%" style="display: block; margin: auto auto auto 0;" />
 <ol style="list-style-type: decimal">
 <li>First, 35% was drawn from the prior with some probability (in fact, the same probability as every other value since it was uniform).</li>
 <li>Then, of those prior probabilites that were 35%, only those that matched the data we observed were retained (in our case 6).<br />
@@ -708,7 +853,7 @@ hist(signups, xlim = c(0, 100))</code></pre>
 <li>This value, needs to be divided by the total number of draws that match the data (6).</li>
 </ol></li>
 <li>This procedure can be done for all prior rates, to get a prior distribution.</li>
-<li><p>Known as <strong>Bayes Theorem</strong> <img src="images/bayes_eg1_summary.png" width="50%" style="display: block; margin: auto auto auto 0;" /></p></li>
+<li><p>Known as <strong>Bayes Theorem</strong> <img src="assets/bayes_eg1_summary.png" width="50%" style="display: block; margin: auto auto auto 0;" /></p></li>
 <li>Important notes:
 <ul>
 <li>Approximate Bayesian Computation (ABC) (<em>what we just did</em>): conceptually easy, but very slow.</li>
@@ -737,9 +882,9 @@ hist(signups, xlim = c(0, 100))</code></pre>
 <li>Allows you to include information sources in addition to the data (for e.g. expert opinion).
 <ul>
 <li>For example: CEO suggests that more than 20% never sign up.</li>
-<li>Informative priors: often use beta distributions to represent prior information. <img src="images/bayes_beta_dist.png" width="50%" style="display: block; margin: auto auto auto 0;" /></li>
+<li>Informative priors: often use beta distributions to represent prior information. <img src="assets/bayes_beta_dist.png" width="50%" style="display: block; margin: auto auto auto 0;" /></li>
 <li>Non-informative prior: uniformative ditribution.</li>
-<li>Same procedure will be used, but parameters will be drawn from new informative prior ditribution. <img src="images/bayes_eg2_informative_prior.png" width="50%" style="display: block; margin: auto auto auto 0;" /></li>
+<li>Same procedure will be used, but parameters will be drawn from new informative prior ditribution. <img src="assets/bayes_eg2_informative_prior.png" width="50%" style="display: block; margin: auto auto auto 0;" /></li>
 <li>As the amount of read data increases, the influence of the prior decreases.</li>
 <li>With no data, the posterior = the prior.</li>
 </ul></li>

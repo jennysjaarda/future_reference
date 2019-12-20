@@ -13,7 +13,7 @@
 
 <meta name="date" content="2019-12-20" />
 
-<title>ldscr</title>
+<title>LD Score Regression</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -407,7 +407,7 @@ div.section {
 
 
 
-<h1 class="title toc-ignore">ldscr</h1>
+<h1 class="title toc-ignore">LD Score Regression</h1>
 <h4 class="author">Jenny</h4>
 <h4 class="date">2019-12-20</h4>
 
@@ -525,10 +525,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomjennysjaardafuturereferencetree1d7bcab82e9ff2806909c2825e940369d0f4168ftargetblank1d7bcaba"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/jennysjaarda/future_reference/tree/1d7bcab82e9ff2806909c2825e940369d0f4168f" target="_blank">1d7bcab</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomjennysjaardafuturereferencetree89b229f4581ddc227b608465794e2aea8dc2fad6targetblank89b229fa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/jennysjaarda/future_reference/tree/89b229f4581ddc227b608465794e2aea8dc2fad6" target="_blank">89b229f</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomjennysjaardafuturereferencetree1d7bcab82e9ff2806909c2825e940369d0f4168ftargetblank1d7bcaba" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomjennysjaardafuturereferencetree89b229f4581ddc227b608465794e2aea8dc2fad6targetblank89b229fa" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -582,6 +582,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/jennysjaarda/future_reference/blob/89b229f4581ddc227b608465794e2aea8dc2fad6/analysis/ldsr.Rmd" target="_blank">89b229f</a>
+</td>
+<td>
+Jenny
+</td>
+<td>
+2019-12-20
+</td>
+<td>
+Updating webiste
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/jennysjaarda/future_reference/bf770c287871430d8d5a989d58e1fb1c07607c37/docs/ldsr.html" target="_blank">bf770c2</a>
+</td>
+<td>
+Jenny
+</td>
+<td>
+2019-12-20
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/jennysjaarda/future_reference/blob/1d7bcab82e9ff2806909c2825e940369d0f4168f/analysis/ldsr.Rmd" target="_blank">1d7bcab</a>
 </td>
 <td>
@@ -600,9 +634,6 @@ Updating webiste
 <hr>
 </div>
 </div>
-</div>
-<div id="introduction" class="section level2">
-<h2>Introduction</h2>
 </div>
 <div id="ld-score-regression-overview" class="section level1">
 <h1>LD Score Regression Overview</h1>
@@ -634,7 +665,7 @@ Updating webiste
 <li>Assuming a uniform prior, we see SNPs with more LD friends showing more associatin.</li>
 <li>In other words, the more variation you tag (the more LD friends you have), the more likely you are to tag a causal variant simply because you have a higher chance of hitting a causal SNP.</li>
 </ul>
-<p><img src="images/LD_score_LD_intuition.png" width="50%" style="display: block; margin: auto auto auto 0;" /></p>
+<p><img src="assets/LD_score_LD_intuition.png" width="50%" style="display: block; margin: auto auto auto 0;" /></p>
 </div>
 <div id="some-intuition-on-ld-and-drift" class="section level3">
 <h3>Some intuition on LD and drift</h3>
@@ -647,7 +678,7 @@ Updating webiste
 <li>The liklihood that you have drifted is not related to the size of the block.</li>
 <li>Under pure drift we expect LD to have no relatinship to difference in allele frequencies between populations.</li>
 </ul>
-<p><img src="images/LD_score_drift_intuition.png" width="50%" style="display: block; margin: auto auto auto 0;" /></p>
+<p><img src="assets/LD_score_drift_intuition.png" width="50%" style="display: block; margin: auto auto auto 0;" /></p>
 <ul>
 <li>Selection or differences in LD structure will cause the model to breakdown.</li>
 </ul>
@@ -660,7 +691,7 @@ Updating webiste
 <li>This implicitly assumes a relationship of beta with MAF (i.e. smaller MAFs equate to larger betas).</li>
 <li>In a GWAS we estimate marginal effects (one SNP at a time) which can be broken down into three components: (1) bias from confounders, causal (or tagging of causal estimate), estimation error (captured by SE).</li>
 <li>You get a sum over the effects of all the SNPs you are correlated with proportional to how correlated you are with that SNP</li>
-<li><p>In a GWAS you get an underlying additional piece of information due to this correlation with other SNPs. <img src="images/LD_score_derivation1.png" width="50%" style="display: block; margin: auto auto auto 0;" /></p></li>
+<li><p>In a GWAS you get an underlying additional piece of information due to this correlation with other SNPs. <img src="assets/LD_score_derivation1.png" width="50%" style="display: block; margin: auto auto auto 0;" /></p></li>
 <li>Assumptions of the model:
 <ul>
 <li>Expected beta is 0.</li>
@@ -672,7 +703,7 @@ Updating webiste
 <li>Confounding is not related to error.</li>
 </ul></li>
 </ul>
-<p><img src="images/LD_score_assumptions.png" width="50%" style="display: block; margin: auto auto auto 0;" /></p>
+<p><img src="assets/LD_score_assumptions.png" width="50%" style="display: block; margin: auto auto auto 0;" /></p>
 <ul>
 <li>Convertion to chi-square and expectations:
 <ul>
@@ -680,7 +711,7 @@ Updating webiste
 <li>var(e) is approximately 1/N.</li>
 </ul></li>
 </ul>
-<p><img src="images/LD_score_derivation2.png" width="50%" style="display: block; margin: auto auto auto 0;" /></p>
+<p><img src="assets/LD_score_derivation2.png" width="50%" style="display: block; margin: auto auto auto 0;" /></p>
 <ul>
 <li>Take expectation and sub in assumptions:
 <ul>
@@ -688,7 +719,7 @@ Updating webiste
 <li>Subbing into previous equation, we get the fundamental LD-score equation.</li>
 </ul></li>
 </ul>
-<p><img src="images/LD_score_derivation3.png" width="50%" style="display: block; margin: auto auto auto 0;" /></p>
+<p><img src="assets/LD_score_derivation3.png" width="50%" style="display: block; margin: auto auto auto 0;" /></p>
 <div id="estimation-with-ld-score-regression" class="section level4">
 <h4>Estimation with LD score regression</h4>
 <ul>
@@ -738,15 +769,15 @@ Updating webiste
 <li>With disjoint categories it’s the simplest case.</li>
 <li>Otherwise we assume overlapping categories act additively on the total variance (e.g. in both a coding region and a conserved region).</li>
 </ul>
-<p><img src="images/LD_score_partioning_h2_overview.png" width="50%" style="display: block; margin: auto auto auto 0;" /></p>
+<p><img src="assets/LD_score_partioning_h2_overview.png" width="50%" style="display: block; margin: auto auto auto 0;" /></p>
 <ul>
 <li>Gives an LD score for each category.</li>
 </ul>
-<p><img src="images/LD_score_partioning_h2_derivation.png" width="50%" style="display: block; margin: auto auto auto 0;" /></p>
+<p><img src="assets/LD_score_partioning_h2_derivation.png" width="50%" style="display: block; margin: auto auto auto 0;" /></p>
 <ul>
 <li>Estimate tau via multiple regression with LD score computed from reference.</li>
 </ul>
-<p><img src="images/LD_score_overview.png" width="50%" style="display: block; margin: auto auto auto 0;" /></p>
+<p><img src="assets/LD_score_overview.png" width="50%" style="display: block; margin: auto auto auto 0;" /></p>
 <p>See the following slides sets in “/slides” folder:</p>
 <ol style="list-style-type: decimal">
 <li><a href="https://www.med.unc.edu/pgc/statgen/stat-gen-archive-2015/">Brendan Bulik-Sullivan</a></li>
