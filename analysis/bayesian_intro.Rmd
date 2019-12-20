@@ -36,7 +36,7 @@ Tutorials: [Part 1](https://www.youtube.com/watch?v=3OJEae7Qb_o), [Part 2](https
     - Randomly generate theta 100,000x and fit: Binomial(16, theta); in other words
     - Remove all simulations that did not match our data exactly. 
 ```{r , echo=FALSE, out.width = '50%',fig.align='left'}
-knitr::include_graphics("images/bayes_eg1_remove_sims.png")
+knitr::include_graphics("assets/bayes_eg1_remove_sims.png")
 ```
 
     - Then we are left with a new set of thetas, and we have a new distribution (posterior). 
@@ -105,7 +105,7 @@ hist(signups, xlim = c(0, 100))
 - How exactly did we get the posterior probability from the prior? 
 - Let's use a sign up rate of 35% as an example and see how it change from the prior to the posterior probability:
 ```{r , echo=FALSE, out.width = '50%',fig.align='left'}
-knitr::include_graphics("images/bayes_eg1_prior_posterior.png")
+knitr::include_graphics("assets/bayes_eg1_prior_posterior.png")
 ```
     1. First, 35% was drawn from the prior with some probability (in fact, the same probability as every other value since it was uniform). 
     2. Then, of those prior probabilites that were 35%, only those that matched the data we observed were retained (in our case 6).  
@@ -115,7 +115,7 @@ knitr::include_graphics("images/bayes_eg1_prior_posterior.png")
 - This procedure can be done for all prior rates, to get a prior distribution.
 - Known as **Bayes Theorem**
 ```{r , echo=FALSE, out.width = '50%',fig.align='left'}
-knitr::include_graphics("images/bayes_eg1_summary.png")
+knitr::include_graphics("assets/bayes_eg1_summary.png")
 ```
 
 - Important notes: 
@@ -138,12 +138,12 @@ knitr::include_graphics("images/bayes_eg1_summary.png")
     - For example: CEO suggests that more than 20% never sign up.
     - Informative priors: often use beta distributions to represent prior information.
 ```{r , echo=FALSE, out.width = '50%',fig.align='left'}
-knitr::include_graphics("images/bayes_beta_dist.png")
+knitr::include_graphics("assets/bayes_beta_dist.png")
 ``` 
     - Non-informative prior: uniformative ditribution. 
     - Same procedure will be used, but parameters will be drawn from new informative prior ditribution. 
 ```{r , echo=FALSE, out.width = '50%',fig.align='left'}
-knitr::include_graphics("images/bayes_eg2_informative_prior.png")
+knitr::include_graphics("assets/bayes_eg2_informative_prior.png")
 ```
     - As the amount of read data increases, the influence of the prior decreases. 
     - With no data, the posterior = the prior. 

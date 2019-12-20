@@ -1,5 +1,5 @@
 ---
-title: "ldscr"
+title: "LD Score Regression"
 author: "Jenny"
 date: "2019-12-20"
 output: workflowr::wflow_html
@@ -7,7 +7,6 @@ editor_options:
   chunk_output_type: console
 ---
 
-## Introduction
 
 # LD Score Regression Overview
 Raymond Walters, post-doc, BROAD
@@ -38,7 +37,7 @@ LD Score regression lives in series of 3 papers in Nature Genetics (2015):
   - In other words, the more variation you tag (the more LD friends you have), the more likely you are to tag a causal variant simply because you have a higher chance of hitting a causal SNP. 
 
 ```{r , echo=FALSE, out.width = '50%',fig.align='left'}
-knitr::include_graphics("images/LD_score_LD_intuition.png")
+knitr::include_graphics("assets/LD_score_LD_intuition.png")
 ```
 
 
@@ -51,7 +50,7 @@ knitr::include_graphics("images/LD_score_LD_intuition.png")
   - Under pure drift we expect LD to have no relatinship to difference in allele frequencies between populations.
 
 ```{r echo=FALSE, out.width = '50%',fig.align='left'}
-knitr::include_graphics("images/LD_score_drift_intuition.png")
+knitr::include_graphics("assets/LD_score_drift_intuition.png")
 ```
 
   - Selection or differences in LD structure will cause the model to breakdown. 
@@ -64,7 +63,7 @@ knitr::include_graphics("images/LD_score_drift_intuition.png")
 - You get a sum over the effects of all the SNPs you are correlated with proportional to how correlated you are with that SNP
 - In a GWAS you get an underlying additional piece of information due to this correlation with other SNPs.
 ```{r , echo=FALSE, out.width = '50%',fig.align='left'}
-knitr::include_graphics("images/LD_score_derivation1.png")
+knitr::include_graphics("assets/LD_score_derivation1.png")
 ```
    
 - Assumptions of the model: 
@@ -76,7 +75,7 @@ knitr::include_graphics("images/LD_score_derivation1.png")
   - Confounding is not related to error. 
   
 ```{r , echo=FALSE, out.width = '50%',fig.align='left'}
-knitr::include_graphics("images/LD_score_assumptions.png")
+knitr::include_graphics("assets/LD_score_assumptions.png")
 ```
 
 - Convertion to chi-square and expectations: 
@@ -84,7 +83,7 @@ knitr::include_graphics("images/LD_score_assumptions.png")
   - var(e) is approximately 1/N.
   
 ```{r , echo=FALSE, out.width = '50%',fig.align='left'}
-knitr::include_graphics("images/LD_score_derivation2.png")
+knitr::include_graphics("assets/LD_score_derivation2.png")
 ```
   
 - Take expectation and sub in assumptions:
@@ -92,7 +91,7 @@ knitr::include_graphics("images/LD_score_derivation2.png")
   - Subbing into previous equation, we get the fundamental LD-score equation. 
 
 ```{r , echo=FALSE, out.width = '50%',fig.align='left'}
-knitr::include_graphics("images/LD_score_derivation3.png")
+knitr::include_graphics("assets/LD_score_derivation3.png")
 ```
 
 
@@ -131,19 +130,19 @@ knitr::include_graphics("images/LD_score_derivation3.png")
 - Otherwise we assume overlapping categories act additively on the total variance (e.g. in both a coding region and a conserved region). 
 
 ```{r , echo=FALSE, out.width = '50%',fig.align='left'}
-knitr::include_graphics("images/LD_score_partioning_h2_overview.png")
+knitr::include_graphics("assets/LD_score_partioning_h2_overview.png")
 ```
 
 - Gives an LD score for each category.
 
 ```{r , echo=FALSE, out.width = '50%',fig.align='left'}
-knitr::include_graphics("images/LD_score_partioning_h2_derivation.png")
+knitr::include_graphics("assets/LD_score_partioning_h2_derivation.png")
 ```
 
 - Estimate tau via multiple regression with LD score computed from reference.
 
 ```{r , echo=FALSE, out.width = '50%',fig.align='left'}
-knitr::include_graphics("images/LD_score_overview.png")
+knitr::include_graphics("assets/LD_score_overview.png")
 ```
 
 See the following slides sets in "/slides" folder:
