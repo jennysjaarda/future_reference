@@ -525,10 +525,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomjennysjaardafuturereferencetree89b229f4581ddc227b608465794e2aea8dc2fad6targetblank89b229fa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/jennysjaarda/future_reference/tree/89b229f4581ddc227b608465794e2aea8dc2fad6" target="_blank">89b229f</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomjennysjaardafuturereferencetreeb608c0955bfe8490d33095bf1b5edf1ccb2cbfb6targetblankb608c09a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/jennysjaarda/future_reference/tree/b608c0955bfe8490d33095bf1b5edf1ccb2cbfb6" target="_blank">b608c09</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomjennysjaardafuturereferencetree89b229f4581ddc227b608465794e2aea8dc2fad6targetblank89b229fa" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomjennysjaardafuturereferencetreeb608c0955bfe8490d33095bf1b5edf1ccb2cbfb6targetblankb608c09a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -536,9 +536,6 @@ Great! You are using Git for version control. Tracking code development and conn
 <pre><code>
 Ignored files:
     Ignored:    .Rproj.user/
-
-Unstaged changes:
-    Modified:   analysis/_site.yml
 
 </code></pre>
 <p>
@@ -577,6 +574,23 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/jennysjaarda/future_reference/e2df4055aaaf777d27fc4f5dcf64905e788f896a/docs/bayesian_intro.html" target="_blank">e2df405</a>
+</td>
+<td>
+Jenny
+</td>
+<td>
+2019-12-20
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -665,7 +679,46 @@ Updating webiste
 <li>Our current model has one unknown: rate of signing up (i.e. it is unknown whether each random individual will sign up or not).</li>
 <li>There is also uncertainty in the probability of signing up itself (let’s represent it as a uniform distribution).</li>
 <li>Randomly generate theta 100,000x and fit: Binomial(16, theta); in other words</li>
-<li><p>Remove all simulations that did not match our data exactly. <img src="assets/bayes_eg1_remove_sims.png" width="50%" style="display: block; margin: auto auto auto 0;" /></p></li>
+<li>Remove all simulations that did not match our data exactly. <img src="assets/bayes_eg1_remove_sims.png" width="50%" style="display: block; margin: auto auto auto 0;" /></li>
+</ul>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-bayes_eg1_remove_sims">
+Past versions of bayes_eg1_remove_sims.png
+</button>
+</p>
+<div id="fig-bayes_eg1_remove_sims" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jennysjaarda/future_reference/blob/53fa8bd65b918e043571fd1c10ca65dc168ba1ce/docs/assets/bayes_eg1_remove_sims.png" target="_blank">53fa8bd</a>
+</td>
+<td>
+Jenny
+</td>
+<td>
+2019-12-20
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<ul>
 <li>Then we are left with a new set of thetas, and we have a new distribution (posterior).</li>
 </ul></li>
 <li>The maximum likelihood estimate is the most likely parameter to generate the observed data.</li>
@@ -844,7 +897,44 @@ Jenny
 <ul>
 <li>We started with a prior (uniform distribution) and moved to a posterior (roughly normal).</li>
 <li>How exactly did we get the posterior probability from the prior?</li>
-<li>Let’s use a sign up rate of 35% as an example and see how it change from the prior to the posterior probability: <img src="assets/bayes_eg1_prior_posterior.png" width="50%" style="display: block; margin: auto auto auto 0;" />
+<li><p>Let’s use a sign up rate of 35% as an example and see how it change from the prior to the posterior probability: <img src="assets/bayes_eg1_prior_posterior.png" width="50%" style="display: block; margin: auto auto auto 0;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-bayes_eg1_prior_posterior">
+Past versions of bayes_eg1_prior_posterior.png
+</button>
+</p>
+<div id="fig-bayes_eg1_prior_posterior" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jennysjaarda/future_reference/blob/53fa8bd65b918e043571fd1c10ca65dc168ba1ce/docs/assets/bayes_eg1_prior_posterior.png" target="_blank">53fa8bd</a>
+</td>
+<td>
+Jenny
+</td>
+<td>
+2019-12-20
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <ol style="list-style-type: decimal">
 <li>First, 35% was drawn from the prior with some probability (in fact, the same probability as every other value since it was uniform).</li>
 <li>Then, of those prior probabilites that were 35%, only those that matched the data we observed were retained (in our case 6).<br />
@@ -853,7 +943,44 @@ Jenny
 <li>This value, needs to be divided by the total number of draws that match the data (6).</li>
 </ol></li>
 <li>This procedure can be done for all prior rates, to get a prior distribution.</li>
-<li><p>Known as <strong>Bayes Theorem</strong> <img src="assets/bayes_eg1_summary.png" width="50%" style="display: block; margin: auto auto auto 0;" /></p></li>
+<li><p>Known as <strong>Bayes Theorem</strong> <img src="assets/bayes_eg1_summary.png" width="50%" style="display: block; margin: auto auto auto 0;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-bayes_eg1_summary">
+Past versions of bayes_eg1_summary.png
+</button>
+</p>
+<div id="fig-bayes_eg1_summary" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jennysjaarda/future_reference/blob/53fa8bd65b918e043571fd1c10ca65dc168ba1ce/docs/assets/bayes_eg1_summary.png" target="_blank">53fa8bd</a>
+</td>
+<td>
+Jenny
+</td>
+<td>
+2019-12-20
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div></li>
 <li>Important notes:
 <ul>
 <li>Approximate Bayesian Computation (ABC) (<em>what we just did</em>): conceptually easy, but very slow.</li>
@@ -883,11 +1010,95 @@ Jenny
 <ul>
 <li>For example: CEO suggests that more than 20% never sign up.</li>
 <li>Informative priors: often use beta distributions to represent prior information. <img src="assets/bayes_beta_dist.png" width="50%" style="display: block; margin: auto auto auto 0;" /></li>
-<li>Non-informative prior: uniformative ditribution.</li>
+</ul></li>
+</ol>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-bayes_beta_dist">
+Past versions of bayes_beta_dist.png
+</button>
+</p>
+<div id="fig-bayes_beta_dist" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jennysjaarda/future_reference/blob/53fa8bd65b918e043571fd1c10ca65dc168ba1ce/docs/assets/bayes_beta_dist.png" target="_blank">53fa8bd</a>
+</td>
+<td>
+Jenny
+</td>
+<td>
+2019-12-20
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<ul>
+<li>Non-informative prior: uniformative ditribution.
+<ul>
 <li>Same procedure will be used, but parameters will be drawn from new informative prior ditribution. <img src="assets/bayes_eg2_informative_prior.png" width="50%" style="display: block; margin: auto auto auto 0;" /></li>
-<li>As the amount of read data increases, the influence of the prior decreases.</li>
+</ul></li>
+</ul>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-bayes_eg2_informative_prior">
+Past versions of bayes_eg2_informative_prior.png
+</button>
+</p>
+<div id="fig-bayes_eg2_informative_prior" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jennysjaarda/future_reference/blob/53fa8bd65b918e043571fd1c10ca65dc168ba1ce/docs/assets/bayes_eg2_informative_prior.png" target="_blank">53fa8bd</a>
+</td>
+<td>
+Jenny
+</td>
+<td>
+2019-12-20
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<ul>
+<li>As the amount of read data increases, the influence of the prior decreases.
+<ul>
 <li>With no data, the posterior = the prior.</li>
 </ul></li>
+</ul>
+<ol start="3" style="list-style-type: decimal">
 <li>The result of a Bayesian analysis retains the uncertainty of the estimated parameters, which is useful in prediction and decision analysis.
 <ul>
 <li>Can help with financial decisions, if one method is more expensive, for example.</li>
