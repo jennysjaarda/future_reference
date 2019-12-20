@@ -1,0 +1,13 @@
+---
+title: "Notes"
+author: "Jenny"
+date: "2019-12-20"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: console
+---
+
+- [LD score regression](ldsr.html)
+- [Introduction to bayesian analysis](bayesian_intro.html)
+
+

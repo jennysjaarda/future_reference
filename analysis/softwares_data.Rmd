@@ -1,0 +1,34 @@
+---
+title: "Softwares and Data"
+author: "Jenny"
+date: "2019-12-20"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: console
+---
+
+## Softwares and repositories 
+
+- [MATCH](http://match.ctglab.nl/#/home)
+- [GWAS Catalog](https://www.ebi.ac.uk/gwas/)
+- [GTEX Catalog](https://www.gtexportal.org/home/)
+- [PRSice](https://choishingwan.github.io/PRSice/)
+- PLINK [v1.9](https://www.cog-genomics.org/plink/1.9/) and [2.0](https://www.cog-genomics.org/plink/2.0/)
+- [HAIL](https://hail.is/)
+- [SamTools](http://www.htslib.org/)
+- [SnpSift](http://snpeff.sourceforge.net/SnpSift.html#annotate)
+- [Post imputation checking](https://www.well.ox.ac.uk/~wrayner/tools/Post-Imputation.html)
+- [PennCNV](http://penncnv.openbioinformatics.org/en/latest/)
+
+## Consortia 
+
+- [International Inflammatory Bowel Disease Genetics Consortium (IIBDGC)](https://www.ibdgenetics.org/)
+- [GIANT](http://portals.broadinstitute.org/collaboration/giant/index.php/Main_Page)
+- [CARDIoGRAMplusC4D](http://www.cardiogramplusc4d.org/)
+- [DIAGRAM](http://diagram-consortium.org/pub.html)
+- [MAGIC (the Meta-Analyses of Glucose and Insulin-related traits Consortium)](https://www.magicinvestigators.org/)
+- [Global Lipids Genetics Consortium](http://csg.sph.umich.edu/willer/public/lipids2013/)
+- [The GEnetic Factors for OSteoporosis (GEFOS)](http://www.gefos.org/)
+- [Psychiatric Genomics Consortium (PGC)](https://www.med.unc.edu/pgc/)
+- [The National Institute on Aging Genetics of Alzheimer's Disease](https://www.niagads.org/) (requires access request)
+- [CKDGen](https://ckdgen.imbi.uni-freiburg.de/)

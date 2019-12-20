@@ -1,0 +1,20 @@
+---
+title: "Papers"
+author: "Jenny"
+date: "2019-12-20"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: console
+---
+
+Below are some papers that have I have found useful, categorized as either: 
+
+  - [Reviews](#reviews)
+  - [Methods](#methds)
+  - [Original research](#research) 
+
+## Reviews<a name="reviews"></a>
+
+## Methods<a name="methods"></a>
+
+## Applied Research<a name="research"></a>

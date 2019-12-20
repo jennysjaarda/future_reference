@@ -1,0 +1,54 @@
+---
+title: "Setup"
+author: "Jenny Sjaarda"
+date: "2019-12-20"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: inline
+---
+
+This directory was setup by following the steps below
+
+```{r eval=FALSE}
+
+setwd("Dropbox/gitrepos")
+library("workflowr")
+project_name <- "future_reference"
+wflow_start(project_name) # creates directory called project_name
+
+wflow_build() # create directories
+
+wflow_publish(c("analysis/index.Rmd", "analysis/about.Rmd", "analysis/license.Rmd"),
+              "Publish the initial files for myproject")
+
+wflow_use_github("jennysjaarda") # select option 2: manually create new repository on github 
+
+wflow_git_push()
+
+```
+
+To maintain the website the general workflow outlined by [workflowr](https://jdblischak.GitHub.io/workflowr/articles/wflow-01-getting-started.html#the-workflow) were followed: 
+
+  1. Open a new or existing R Markdown file in `analysis/` (optionally using `wflow_open()`). If creating manually, add the following to the top of the R Markdown file with an appropriate name for `Title`:
+  
+```{r eval=FALSE}
+---
+title: "Title"
+site: workflowr::wflow_site
+output:
+  workflowr::wflow_html:
+    toc: true
+---
+```
+
+  2. Write documentation in the R Markdown file.
+
+  3. Run `wflow_build()` to view the results as they will appear on teh website (alternatively press the Knit button in RStudio).
+
+  4. Go back to step 2 until satisfied. 
+  
+  5. Run `wflow_publish()` to commit the sourcefile.
+  
+  6. Push the changes to GitHub with `wflow_git_push()` (or `git push` in Terminal).
+
+  7. Use `wflow_status()` to track repository.

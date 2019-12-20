@@ -1,0 +1,33 @@
+---
+title: "Learning Material"
+author: "Jenny"
+date: "2019-12-20"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: console
+---
+
+## Presentations and lectures
+
+## Tutorials and overviews 
+
+- [Five minute stats](http://stephens999.github.io/fiveMinuteStats/index.html)
+- [The hitchhiker's guide to a GWAS](https://rstudio-pubs-static.s3.amazonaws.com/452627_d519d1c86bd249e6a2d9638ef1ea836c.html)
+- [Maximum likelihood estimation](http://statgen.iop.kcl.ac.uk/bgim/mle/sslike_1.html)
+- [Bioinformatics Workbook](https://bioinformaticsworkbook.org/about.html), see the [tutorial index](https://bioinformaticsworkbook.org/list.html)
+- [NEJM Glossary](https://illustrated-glossary.nejm.org/)
+
+## Courses 
+
+
+## Blogs 
+
+- [Simply stats](https://simplystatistics.org/)
+- [Rebecca Barter](http://www.rebeccabarter.com/)
+- [Little miss data](https://www.littlemissdata.com/)
+- [Gigabase or gigabyte](https://gigabaseorgigabyte.wordpress.com/)
+
+```{r}
+
+```
+

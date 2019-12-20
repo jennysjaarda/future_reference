@@ -1,0 +1,85 @@
+---
+title: "Programming"
+author: "Jenny Sjaarda"
+date: "2019-12-20"
+output: workflowr::wflow_html
+---
+
+
+# Bash
+```{bash, eval=F}
+# enter a screen
+screen -r my_screen_name 
+
+# view screens
+screen -ls
+
+# go to start of line
+CTRL + A 
+
+# enter copy mode
+CTRL + A + [
+
+# full page up/down
+CTRL + B/F
+
+# half page up/down
+CTRL U/D
+
+# kill a screen
+screen -X -S [name] quit
+
+# kill a screen
+screen -X -S [name] quit
+
+# copy to local computer
+scp -r je4649@hpc1.chuv.ch://data/sgg2/jenny/projects/PSYMETAB/debug /Users/Jenny/Desktop
+
+
+```
+
+# R 
+```{R, eval=F}
+rmote::start_rmote()
+# Navigate to: http://localhost:4321/
+```
+
+# Slurm
+```{bash, eval=F}
+sinfo
+
+squeue -p sgg -u je4649 
+#terminate job
+cancel <jobid>
+
+## open a node
+srun -n 16 --pty --partition=sgg /bin/bash 
+
+# detach from node
+CTRL + A + D 
+
+# detach and terminate
+CTRL + D D
+
+scancel -u je4649
+
+sinfo --Node --long
+
+#print a certain line: 
+awk ‘NR==x’ file
+
+# rename a screen
+screen -S <oldname> -X sessionname <newname>
+
+
+## 
+mkdir /Users/Jenny/Desktop/mounted
+
+sshfs -p 22 je4649@hpc1.chuv.ch:/data/sgg2/jenny /Users/Jenny/Desktop/mounted -oauto_cache,reconnect,defer_permissions,noappledouble,negative_vncache,volname=sgg_projects
+
+umount /Users/Jenny/Desktop/mounted
+rm -rf /Users/Jenny/Desktop/mounted
+
+
+```
+

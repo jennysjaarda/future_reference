@@ -1,0 +1,194 @@
+---
+title: "bayesian_intro"
+author: "Jenny"
+date: "2019-12-20"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: console
+---
+
+# Introdcution to Bayesian analysis: 
+Tutorials: [Part 1](https://www.youtube.com/watch?v=3OJEae7Qb_o), [Part 2](https://www.youtube.com/watch?v=mAUwjSo5TJE), [Part 3](https://www.youtube.com/watch?v=Ie-6H_r7I5A)
+
+[Exercises 1](http://www.sumsar.net/files/posts/2017-bayesian-tutorial-exercises/modeling_exercise1.html), [Exercise 2](http://www.sumsar.net/files/posts/2017-bayesian-tutorial-exercises/modeling_exercise2.html), [Beginner's Exercise](http://sumsar.net/blog/2017/01/bayesian-computation-with-stan-and-farmer-jons/)
+
+## Part 1: What is Bayesian data analysis?
+
+- When you use probability to represent uncertainty in all parts of a statistical model. 
+- Flexible extension of maximum likelihood.
+- Information-efficient method to fit a statistical model (computationally intensive).
+- A method for figuring out unknowns that requires 3 things:
+    1. Data.
+    2. A generative model (any kind of program/expression, that you feed fixed values and generate simulated data, e.g. normal distribution). 
+    3. Priors (information the model has before seeing the data).
+- Often we have data, and want to determine the model - Bayesian inference
+- A motivating example: Bayesian A/B testing for Swedish Fish Incorporated (SFI)
+    - SFI sells fish on a subscription basis, but how should they enter Danish market? 
+    - Method A experiment - send out brochure advertising one year subscription plan.
+    - 6 Danes signed up out of 16 that received the brochure (38%).
+    - Does this mean 38% of people that receive brochure will sign up?
+    - Is this generalizable? It’s a small sample. How uncertain is this?
+    - We have requirement #1 (data). 
+    - Assume there is one underlying rate with which people sign up (e.g. 55%).
+    - Count how many sign up (in R). 
+    - Our current model has one unknown: rate of signing up (i.e. it is unknown whether each random individual will sign up or not). 
+    - There is also uncertainty in the probability of signing up itself (let’s represent it as a uniform distribution). 
+    - Randomly generate theta 100,000x and fit: Binomial(16, theta); in other words
+    - Remove all simulations that did not match our data exactly. 
+```{r , echo=FALSE, out.width = '50%',fig.align='left'}
+knitr::include_graphics("images/bayes_eg1_remove_sims.png")
+```
+
+    - Then we are left with a new set of thetas, and we have a new distribution (posterior). 
+- The maximum likelihood estimate is the most likely parameter to generate the observed data. 
+- If you use flat priors, you always get the maximum likelihood estimate
+- Credible interval gives the rate with X% certainty. 
+
+### Exercise 1: 
+
+Swedish Fish Incorporated is the largest Swedish company delivering fish by mail order. They are now trying to get into the lucrative Danish market by selling one year Salmon subscriptions. The marketing department have done a pilot study and tried the following marketing method:
+
+A: Sending a mail with a colorful brochure that invites people to sign up for a one year salmon subscription.
+
+The marketing department sent out 16 mails of type A. Six Danes that received a mail signed up for one year of salmon and marketing now wants to know, how good is method A?
+
+```{r}
+#### Question 1: Build a Bayesian model that answers the question: What would the rate of sign-up be if method A was used on a larger number of people?
+
+# Number of random draws from the prior
+n_draws <- 10000
+size=16
+observed_data=6
+prior <- runif(n_draws, 0, 1) # Here you sample n_draws draws from the prior  
+hist(prior) # It's always good to eyeball the prior to make sure it looks ok.
+
+# Here you define the generative model
+
+generative_model <- function(rate) {
+  subscribers <- rbinom(1, size = size, prob = rate)
+  subscribers
+}
+
+# Here you simulate data using the parameters from the prior and the 
+# generative model
+sim_data <- rep(NA, n_draws)
+for(i in 1:n_draws) {
+  sim_data[i] <- generative_model(prior[i])
+}
+
+# Here you filter off all draws that do not match the data.
+posterior <- prior[sim_data == observed_data] 
+
+hist(posterior) # Eyeball the posterior
+length(posterior) # See that we got enought draws left after the filtering.
+                  # There are no rules here, but you probably want to aim
+                  # for >1000 draws.
+
+# Now you can summarize the posterior, where a common summary is to take the mean
+# or the median posterior, and perhaps a 95% quantile interval.
+median(posterior)
+quantile(posterior, c(0.025, 0.975))
+
+### Question 2: What’s the probability that method A is better than telemarketing?
+
+length(which(posterior>.20))/length(posterior)
+
+### Question 3: If method A was used on 100 people what would be number of sign-ups?
+
+signups <- rbinom(n = length(posterior), size = 100, prob = posterior)
+
+hist(signups, xlim = c(0, 100))
+```
+
+### Summary of exercise 1:
+- We started with a prior (uniform distribution) and moved to a posterior (roughly normal). 
+- How exactly did we get the posterior probability from the prior? 
+- Let's use a sign up rate of 35% as an example and see how it change from the prior to the posterior probability:
+```{r , echo=FALSE, out.width = '50%',fig.align='left'}
+knitr::include_graphics("images/bayes_eg1_prior_posterior.png")
+```
+    1. First, 35% was drawn from the prior with some probability (in fact, the same probability as every other value since it was uniform). 
+    2. Then, of those prior probabilites that were 35%, only those that matched the data we observed were retained (in our case 6).  
+    3. Since these events are independent, they can be multiplied to get the number of events expected - P(35%) * P(6|35%).
+    4. This value, needs to be divided by the total number of draws that match the data (6).
+
+- This procedure can be done for all prior rates, to get a prior distribution.
+- Known as **Bayes Theorem**
+```{r , echo=FALSE, out.width = '50%',fig.align='left'}
+knitr::include_graphics("images/bayes_eg1_summary.png")
+```
+
+- Important notes: 
+  - Approximate Bayesian Computation (ABC) (*what we just did*): conceptually easy, but very slow.
+  - Many other methods exist which are much faster, with the same underlying theory. 
+
+## Part 2: Why to use/not use Bayesian data analysis?
+
+### Why use:
+1. Increased flexibility when building models. 
+    - A motivating example: Bayesian A/B testing for Swedish Fish Incorporated (SFI)
+    - Method B experiment - send out brochure with a sample of frozen salmon. 
+    - 10 Danes signed up out of 16 that received the brochure.
+    - How much better is method B from A? 
+    - Use two prior distributions this time and retain only values that match the data exactly (i.e. for both method A and B). 
+    - Does method B have a higher rate of sign up than rate A?  
+    - We could look at our retained values and the corresponding posterior probabilities, and take the difference between the 2 (rateB - rateA) 
+    - If most >1, suggest method B is better than method A. 
+2. Allows you to include information sources in addition to the data (for e.g. expert opinion). 
+    - For example: CEO suggests that more than 20% never sign up.
+    - Informative priors: often use beta distributions to represent prior information.
+```{r , echo=FALSE, out.width = '50%',fig.align='left'}
+knitr::include_graphics("images/bayes_beta_dist.png")
+``` 
+    - Non-informative prior: uniformative ditribution. 
+    - Same procedure will be used, but parameters will be drawn from new informative prior ditribution. 
+```{r , echo=FALSE, out.width = '50%',fig.align='left'}
+knitr::include_graphics("images/bayes_eg2_informative_prior.png")
+```
+    - As the amount of read data increases, the influence of the prior decreases. 
+    - With no data, the posterior = the prior. 
+3. The result of a Bayesian analysis retains the uncertainty of the estimated parameters, which is useful in prediction and decision analysis. 
+    - Can help with financial decisions, if one method is more expensive, for example. 
+    - Calculate expected earnings based on the posterior probabilities and the difference between the expected earnings. 
+    - Maximum likelihood estimation only gives point estimates, while bayesian analysis gives a distribution of expected earnings (useful).
+4. You probably are already...
+
+### Why not use: 
+1. It is fine as is. 
+2. You aren't that interested in uncertainty. 
+3. Too computationally demanding. 
+4. Too much work to set up. 
+
+## Part 3: How to do Bayesian data analysis?
+
+- So far, we have been doing approximate Bayesian computation (ABC). 
+- Faster methods exist, that: 
+    - Take computational shortcuts by takings advantage of the fact that *likelhood* can be calculated instead of simulated.
+    - Explore the *paramter space* in a smarter way. 
+    - The result is as if you would have used ABC. 
+- Markov Chain Monte Carlo (MCMC): 
+    - A class of algorithms that samples from probability distributions by walking around in the parameter space. 
+    - A main reason Bayes became popular again.
+    - Many types of algorithms: Metropolis-hastings, Gibbs sampling, Hit-n-Run, etc.
+    Hamiltonian Monte Carlo is an efficient MCMC that scales well but difficult to set up unless you use Stan. 
+ - Stan: 
+    - A domain specific probabilistic programming language influenced by R, C++, and BUGS. 
+    - Interfaces to R, pythan, matlab, Stata and Julia. 
+    - You define your model and Stan takes care of fitting it efficiently by compiling it down to C++ and fit it using Hamiltonian Monte Carlo. 
+    - Install [here](https://github.com/stan-dev/rstan/wiki/RStan-Getting-Started).
+    - MCMC: walks around the parameter space and visits each parameter combination proportional to its posterior probility.
+
+### Summary:
+
+- What? 
+    - Bayesian data analysis is a flexible method to fit any type of statistical model. 
+    - Maximum lielihood is a special case of Bayesian model fitting.
+- Why? 
+    - Makes it possible to define highly custom models. 
+    - Makes it possible to include information from many sources (e.g. data and expert knowledge). 
+    - Wuantifies and retains the uncertainty in parameter estimates and predictions). 
+- How? 
+    - Python and R
+    - Stan, etc. 
+    
+        
