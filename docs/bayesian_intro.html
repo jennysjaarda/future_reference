@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Jenny" />
+
+<meta name="date" content="2019-12-20" />
+
+<title>bayesian_intro</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/paper.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">future_reference</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Topics
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="programming.html">Programming</a>
+    </li>
+    <li>
+      <a href="softwares_data.html">Softwares and Data</a>
+    </li>
+    <li>
+      <a href="learning_material.html">Learning Material</a>
+    </li>
+    <li>
+      <a href="notes.html">Notes</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li>
+  <a href="license.html">License</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/jennysjaarda/future_reference">
+    <span class="fa fa-github"></span>
+     
+    Source code
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<!-- Add a small amount of space between sections. -->
+<style type="text/css">
+div.section {
+  padding-top: 12px;
+}
+</style>
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">bayesian_intro</h1>
+<h4 class="author">Jenny</h4>
+<h4 class="date">2019-12-20</h4>
+
+</div>
+
+
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+</button>
+</p>
+<div id="workflowr-report" class="collapse">
+<ul class="nav nav-tabs">
+<li class="active">
+<a data-toggle="tab" href="#summary">Summary</a>
+</li>
+<li>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
+</li>
+<li>
+<a data-toggle="tab" href="#versions">Past versions</a>
+</li>
+</ul>
+<div class="tab-content">
+<div id="summary" class="tab-pane fade in active">
+<p>
+<strong>Last updated:</strong> 2019-12-20
+</p>
+<p>
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
+</p>
+<p>
+<strong>Knit directory:</strong> <code>future_reference/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
+</p>
+<p>
+This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis was created with <a
+  href="https://github.com/jdblischak/workflowr">workflowr</a> (version 1.5.0). The <em>Checks</em> tab describes the reproducibility checks that were applied when the results were created. The <em>Past versions</em> tab lists the development history.
+</p>
+<hr>
+</div>
+<div id="checks" class="tab-pane fade">
+<div id="workflowr-checks" class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
+</p>
+</div>
+<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+</p>
+</div>
+<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! The global environment was empty. Objects defined in the global environment can affect the analysis in your R Markdown file in unknown ways. For reproduciblity it’s best to always run the code in an empty environment.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20191220code"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Seed:</strong> <code>set.seed(20191220)</code> </a>
+</p>
+</div>
+<div id="strongSeedstrongcodesetseed20191220code" class="panel-collapse collapse">
+<div class="panel-body">
+<p>The command <code>set.seed(20191220)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Session information:</strong> recorded </a>
+</p>
+</div>
+<div id="strongSessioninformationstrongrecorded" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Recording the operating system, R version, and package versions is critical for reproducibility.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+</p>
+</div>
+<div id="strongCachestrongnone" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Nice! There were no cached chunks for this analysis, so you can be confident that you successfully produced the results during this run.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
+</p>
+</div>
+<div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Using relative paths to the files within your workflowr project makes it easier to run your code on other machines.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomjennysjaardafuturereferencetree1d7bcab82e9ff2806909c2825e940369d0f4168ftargetblank1d7bcaba"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/jennysjaarda/future_reference/tree/1d7bcab82e9ff2806909c2825e940369d0f4168f" target="_blank">1d7bcab</a> </a>
+</p>
+</div>
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomjennysjaardafuturereferencetree1d7bcab82e9ff2806909c2825e940369d0f4168ftargetblank1d7bcaba" class="panel-collapse collapse">
+<div class="panel-body">
+<p>
+Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
+</p>
+<pre><code>
+Ignored files:
+    Ignored:    .Rproj.user/
+
+Unstaged changes:
+    Modified:   analysis/_site.yml
+
+</code></pre>
+<p>
+Note that any generated files, e.g. HTML, png, CSS, etc., are not included in this status report because it is ok for generated content to have uncommitted changes.
+</p>
+</div>
+</div>
+</div>
+</div>
+<hr>
+</div>
+<div id="versions" class="tab-pane fade">
+
+<p>
+These are the previous versions of the R Markdown and HTML files. If you’ve configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view them.
+</p>
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+File
+</th>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+<th>
+Message
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/jennysjaarda/future_reference/blob/1d7bcab82e9ff2806909c2825e940369d0f4168f/analysis/bayesian_intro.Rmd" target="_blank">1d7bcab</a>
+</td>
+<td>
+Jenny
+</td>
+<td>
+2019-12-20
+</td>
+<td>
+Updating webiste
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+</div>
+</div>
+</div>
+<div id="introdcution-to-bayesian-analysis" class="section level1">
+<h1>Introdcution to Bayesian analysis:</h1>
+<p>Tutorials: <a href="https://www.youtube.com/watch?v=3OJEae7Qb_o">Part 1</a>, <a href="https://www.youtube.com/watch?v=mAUwjSo5TJE">Part 2</a>, <a href="https://www.youtube.com/watch?v=Ie-6H_r7I5A">Part 3</a></p>
+<p><a href="http://www.sumsar.net/files/posts/2017-bayesian-tutorial-exercises/modeling_exercise1.html">Exercises 1</a>, <a href="http://www.sumsar.net/files/posts/2017-bayesian-tutorial-exercises/modeling_exercise2.html">Exercise 2</a>, <a href="http://sumsar.net/blog/2017/01/bayesian-computation-with-stan-and-farmer-jons/">Beginner’s Exercise</a></p>
+<div id="part-1-what-is-bayesian-data-analysis" class="section level2">
+<h2>Part 1: What is Bayesian data analysis?</h2>
+<ul>
+<li>When you use probability to represent uncertainty in all parts of a statistical model.</li>
+<li>Flexible extension of maximum likelihood.</li>
+<li>Information-efficient method to fit a statistical model (computationally intensive).</li>
+<li>A method for figuring out unknowns that requires 3 things:
+<ol style="list-style-type: decimal">
+<li>Data.</li>
+<li>A generative model (any kind of program/expression, that you feed fixed values and generate simulated data, e.g. normal distribution).</li>
+<li>Priors (information the model has before seeing the data).</li>
+</ol></li>
+<li>Often we have data, and want to determine the model - Bayesian inference</li>
+<li>A motivating example: Bayesian A/B testing for Swedish Fish Incorporated (SFI)
+<ul>
+<li>SFI sells fish on a subscription basis, but how should they enter Danish market?</li>
+<li>Method A experiment - send out brochure advertising one year subscription plan.</li>
+<li>6 Danes signed up out of 16 that received the brochure (38%).</li>
+<li>Does this mean 38% of people that receive brochure will sign up?</li>
+<li>Is this generalizable? It’s a small sample. How uncertain is this?</li>
+<li>We have requirement #1 (data).</li>
+<li>Assume there is one underlying rate with which people sign up (e.g. 55%).</li>
+<li>Count how many sign up (in R).</li>
+<li>Our current model has one unknown: rate of signing up (i.e. it is unknown whether each random individual will sign up or not).</li>
+<li>There is also uncertainty in the probability of signing up itself (let’s represent it as a uniform distribution).</li>
+<li>Randomly generate theta 100,000x and fit: Binomial(16, theta); in other words</li>
+<li><p>Remove all simulations that did not match our data exactly. <img src="images/bayes_eg1_remove_sims.png" width="50%" style="display: block; margin: auto auto auto 0;" /></p></li>
+<li>Then we are left with a new set of thetas, and we have a new distribution (posterior).</li>
+</ul></li>
+<li>The maximum likelihood estimate is the most likely parameter to generate the observed data.</li>
+<li>If you use flat priors, you always get the maximum likelihood estimate</li>
+<li>Credible interval gives the rate with X% certainty.</li>
+</ul>
+<div id="exercise-1" class="section level3">
+<h3>Exercise 1:</h3>
+<p>Swedish Fish Incorporated is the largest Swedish company delivering fish by mail order. They are now trying to get into the lucrative Danish market by selling one year Salmon subscriptions. The marketing department have done a pilot study and tried the following marketing method:</p>
+<p>A: Sending a mail with a colorful brochure that invites people to sign up for a one year salmon subscription.</p>
+<p>The marketing department sent out 16 mails of type A. Six Danes that received a mail signed up for one year of salmon and marketing now wants to know, how good is method A?</p>
+<pre class="r"><code>#### Question 1: Build a Bayesian model that answers the question: What would the rate of sign-up be if method A was used on a larger number of people?
+
+# Number of random draws from the prior
+n_draws &lt;- 10000
+size=16
+observed_data=6
+prior &lt;- runif(n_draws, 0, 1) # Here you sample n_draws draws from the prior  
+hist(prior) # It&#39;s always good to eyeball the prior to make sure it looks ok.</code></pre>
+<p><img src="figure/bayesian_intro.Rmd/unnamed-chunk-2-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code># Here you define the generative model
+
+generative_model &lt;- function(rate) {
+  subscribers &lt;- rbinom(1, size = size, prob = rate)
+  subscribers
+}
+
+# Here you simulate data using the parameters from the prior and the 
+# generative model
+sim_data &lt;- rep(NA, n_draws)
+for(i in 1:n_draws) {
+  sim_data[i] &lt;- generative_model(prior[i])
+}
+
+# Here you filter off all draws that do not match the data.
+posterior &lt;- prior[sim_data == observed_data] 
+
+hist(posterior) # Eyeball the posterior</code></pre>
+<p><img src="figure/bayesian_intro.Rmd/unnamed-chunk-2-2.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>length(posterior) # See that we got enought draws left after the filtering.</code></pre>
+<pre><code>[1] 633</code></pre>
+<pre class="r"><code>                  # There are no rules here, but you probably want to aim
+                  # for &gt;1000 draws.
+
+# Now you can summarize the posterior, where a common summary is to take the mean
+# or the median posterior, and perhaps a 95% quantile interval.
+median(posterior)</code></pre>
+<pre><code>[1] 0.3883623</code></pre>
+<pre class="r"><code>quantile(posterior, c(0.025, 0.975))</code></pre>
+<pre><code>     2.5%     97.5% 
+0.1817726 0.6227824 </code></pre>
+<pre class="r"><code>### Question 2: What’s the probability that method A is better than telemarketing?
+
+length(which(posterior&gt;.20))/length(posterior)</code></pre>
+<pre><code>[1] 0.9557662</code></pre>
+<pre class="r"><code>### Question 3: If method A was used on 100 people what would be number of sign-ups?
+
+signups &lt;- rbinom(n = length(posterior), size = 100, prob = posterior)
+
+hist(signups, xlim = c(0, 100))</code></pre>
+<p><img src="figure/bayesian_intro.Rmd/unnamed-chunk-2-3.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="summary-of-exercise-1" class="section level3">
+<h3>Summary of exercise 1:</h3>
+<ul>
+<li>We started with a prior (uniform distribution) and moved to a posterior (roughly normal).</li>
+<li>How exactly did we get the posterior probability from the prior?</li>
+<li>Let’s use a sign up rate of 35% as an example and see how it change from the prior to the posterior probability: <img src="images/bayes_eg1_prior_posterior.png" width="50%" style="display: block; margin: auto auto auto 0;" />
+<ol style="list-style-type: decimal">
+<li>First, 35% was drawn from the prior with some probability (in fact, the same probability as every other value since it was uniform).</li>
+<li>Then, of those prior probabilites that were 35%, only those that matched the data we observed were retained (in our case 6).<br />
+</li>
+<li>Since these events are independent, they can be multiplied to get the number of events expected - P(35%) * P(6|35%).</li>
+<li>This value, needs to be divided by the total number of draws that match the data (6).</li>
+</ol></li>
+<li>This procedure can be done for all prior rates, to get a prior distribution.</li>
+<li><p>Known as <strong>Bayes Theorem</strong> <img src="images/bayes_eg1_summary.png" width="50%" style="display: block; margin: auto auto auto 0;" /></p></li>
+<li>Important notes:
+<ul>
+<li>Approximate Bayesian Computation (ABC) (<em>what we just did</em>): conceptually easy, but very slow.</li>
+<li>Many other methods exist which are much faster, with the same underlying theory.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="part-2-why-to-usenot-use-bayesian-data-analysis" class="section level2">
+<h2>Part 2: Why to use/not use Bayesian data analysis?</h2>
+<div id="why-use" class="section level3">
+<h3>Why use:</h3>
+<ol style="list-style-type: decimal">
+<li>Increased flexibility when building models.
+<ul>
+<li>A motivating example: Bayesian A/B testing for Swedish Fish Incorporated (SFI)</li>
+<li>Method B experiment - send out brochure with a sample of frozen salmon.</li>
+<li>10 Danes signed up out of 16 that received the brochure.</li>
+<li>How much better is method B from A?</li>
+<li>Use two prior distributions this time and retain only values that match the data exactly (i.e. for both method A and B).</li>
+<li>Does method B have a higher rate of sign up than rate A?<br />
+</li>
+<li>We could look at our retained values and the corresponding posterior probabilities, and take the difference between the 2 (rateB - rateA)</li>
+<li>If most &gt;1, suggest method B is better than method A.</li>
+</ul></li>
+<li>Allows you to include information sources in addition to the data (for e.g. expert opinion).
+<ul>
+<li>For example: CEO suggests that more than 20% never sign up.</li>
+<li>Informative priors: often use beta distributions to represent prior information. <img src="images/bayes_beta_dist.png" width="50%" style="display: block; margin: auto auto auto 0;" /></li>
+<li>Non-informative prior: uniformative ditribution.</li>
+<li>Same procedure will be used, but parameters will be drawn from new informative prior ditribution. <img src="images/bayes_eg2_informative_prior.png" width="50%" style="display: block; margin: auto auto auto 0;" /></li>
+<li>As the amount of read data increases, the influence of the prior decreases.</li>
+<li>With no data, the posterior = the prior.</li>
+</ul></li>
+<li>The result of a Bayesian analysis retains the uncertainty of the estimated parameters, which is useful in prediction and decision analysis.
+<ul>
+<li>Can help with financial decisions, if one method is more expensive, for example.</li>
+<li>Calculate expected earnings based on the posterior probabilities and the difference between the expected earnings.</li>
+<li>Maximum likelihood estimation only gives point estimates, while bayesian analysis gives a distribution of expected earnings (useful).</li>
+</ul></li>
+<li>You probably are already…</li>
+</ol>
+</div>
+<div id="why-not-use" class="section level3">
+<h3>Why not use:</h3>
+<ol style="list-style-type: decimal">
+<li>It is fine as is.</li>
+<li>You aren’t that interested in uncertainty.</li>
+<li>Too computationally demanding.</li>
+<li>Too much work to set up.</li>
+</ol>
+</div>
+</div>
+<div id="part-3-how-to-do-bayesian-data-analysis" class="section level2">
+<h2>Part 3: How to do Bayesian data analysis?</h2>
+<ul>
+<li>So far, we have been doing approximate Bayesian computation (ABC).</li>
+<li>Faster methods exist, that:
+<ul>
+<li>Take computational shortcuts by takings advantage of the fact that <em>likelhood</em> can be calculated instead of simulated.</li>
+<li>Explore the <em>paramter space</em> in a smarter way.</li>
+<li>The result is as if you would have used ABC.</li>
+</ul></li>
+<li>Markov Chain Monte Carlo (MCMC):
+<ul>
+<li>A class of algorithms that samples from probability distributions by walking around in the parameter space.</li>
+<li>A main reason Bayes became popular again.</li>
+<li>Many types of algorithms: Metropolis-hastings, Gibbs sampling, Hit-n-Run, etc. Hamiltonian Monte Carlo is an efficient MCMC that scales well but difficult to set up unless you use Stan.</li>
+</ul></li>
+<li>Stan:
+<ul>
+<li>A domain specific probabilistic programming language influenced by R, C++, and BUGS.</li>
+<li>Interfaces to R, pythan, matlab, Stata and Julia.</li>
+<li>You define your model and Stan takes care of fitting it efficiently by compiling it down to C++ and fit it using Hamiltonian Monte Carlo.</li>
+<li>Install <a href="https://github.com/stan-dev/rstan/wiki/RStan-Getting-Started">here</a>.</li>
+<li>MCMC: walks around the parameter space and visits each parameter combination proportional to its posterior probility.</li>
+</ul></li>
+</ul>
+<div id="summary" class="section level3">
+<h3>Summary:</h3>
+<ul>
+<li>What?
+<ul>
+<li>Bayesian data analysis is a flexible method to fit any type of statistical model.</li>
+<li>Maximum lielihood is a special case of Bayesian model fitting.</li>
+</ul></li>
+<li>Why?
+<ul>
+<li>Makes it possible to define highly custom models.</li>
+<li>Makes it possible to include information from many sources (e.g. data and expert knowledge).</li>
+<li>Wuantifies and retains the uncertainty in parameter estimates and predictions).</li>
+</ul></li>
+<li>How?
+<ul>
+<li>Python and R</li>
+<li>Stan, etc.</li>
+</ul></li>
+</ul>
+<br>
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Session information
+</button>
+</p>
+<div id="workflowr-sessioninfo" class="collapse">
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>R version 3.6.1 (2019-07-05)
+Platform: x86_64-apple-darwin15.6.0 (64-bit)
+Running under: macOS Catalina 10.15.2
+
+Matrix products: default
+BLAS:   /Library/Frameworks/R.framework/Versions/3.6/Resources/lib/libRblas.0.dylib
+LAPACK: /Library/Frameworks/R.framework/Versions/3.6/Resources/lib/libRlapack.dylib
+
+locale:
+[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+[1] workflowr_1.5.0
+
+loaded via a namespace (and not attached):
+ [1] Rcpp_1.0.3      rprojroot_1.3-2 digest_0.6.23   later_0.8.0    
+ [5] R6_2.4.1        backports_1.1.5 git2r_0.26.1    magrittr_1.5   
+ [9] evaluate_0.14   stringi_1.4.3   rlang_0.4.2     fs_1.3.1       
+[13] promises_1.0.1  whisker_0.4     rmarkdown_2.0   tools_3.6.1    
+[17] stringr_1.4.0   glue_1.3.1      httpuv_1.5.2    xfun_0.11      
+[21] yaml_2.2.0      compiler_3.6.1  htmltools_0.4.0 knitr_1.26     </code></pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<!-- Adjust MathJax settings so that all math formulae are shown using
+TeX fonts only; see
+http://docs.mathjax.org/en/latest/configuration.html.  This will make
+the presentation more consistent at the cost of the webpage sometimes
+taking slightly longer to load. Note that this only works because the
+footer is added to webpages before the MathJax javascript. -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
