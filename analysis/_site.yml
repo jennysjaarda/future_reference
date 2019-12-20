@@ -1,10 +1,20 @@
-name: future_reference
+name: Future Reference
 output_dir: ../docs
 navbar:
   title: future_reference
   left:
   - text: Home
     href: index.html
+  - text: Topics
+    menu:
+    - text: Programming
+      href: programming.html
+    - text: Softwares and Data
+      href: softwares_data.html
+    - text: Learning Material
+      href: learning_material.html
+    - text: Notes
+      href: notes.html
   - text: About
     href: about.html
   - text: License
@@ -17,5 +27,6 @@ output:
   workflowr::wflow_html:
     toc: yes
     toc_float: yes
-    theme: cosmo
+    theme: paper
     highlight: textmate
+    css: style.css
